@@ -1,0 +1,2 @@
+export const WORK_ACCESS_DEFAULT_PASSWORD = "warmthandcare";
+export const WORK_ACCESS_SLOT_COUNT = WORK_ACCESS_DEFAULT_PASSWORD.length;
