@@ -11,6 +11,8 @@ type WorkPasswordPromptProps = {
   onClose?: () => void;
   onSuccess: () => void;
   className?: string;
+  /** Use sans (Gabarito) instead of Goudy — for case study pages */
+  sansTypography?: boolean;
 };
 
 const ACCESS_EMAIL = "juliosouffront@gmail.com";
@@ -36,6 +38,7 @@ export function WorkPasswordPrompt({
   onClose,
   onSuccess,
   className,
+  sansTypography = false,
 }: WorkPasswordPromptProps) {
   const titleId = useId();
   const descriptionId = useId();
@@ -122,7 +125,13 @@ export function WorkPasswordPrompt({
         </button>
       ) : null}
 
-      <h2 id={titleId} className={cn(typography.h4, "text-center")}>
+      <h2
+        id={titleId}
+        className={cn(
+          sansTypography ? typography.caseStudyCardTitle : typography.h4,
+          "text-center",
+        )}
+      >
         {title}
       </h2>
       <p id={descriptionId} className={cn(typography.caption, "mt-3 text-center")}>
@@ -149,7 +158,10 @@ export function WorkPasswordPrompt({
             <button
               type="submit"
               disabled={isSubmitting || !password}
-              className="inline-flex shrink-0 items-center justify-center rounded-pill border border-neutral-30 bg-neutral-30 px-4 py-2 font-serif text-sm text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+              className={cn(
+                "inline-flex shrink-0 items-center justify-center rounded-pill border border-neutral-30 bg-neutral-30 px-4 py-2 text-sm text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-50",
+                sansTypography ? "font-sans" : "font-serif",
+              )}
             >
               {isSubmitting ? "..." : "Enter"}
             </button>

@@ -40,7 +40,7 @@ export default async function WorkCaseStudyPage({ params }: PageProps) {
   }
 
   return (
-    <main id="main" className="min-h-screen text-neutral-30" style={{ backgroundColor: study.themeColor }}>
+    <main id="main" className="case-study-page min-h-screen text-neutral-30" style={{ backgroundColor: study.themeColor }}>
       <CaseStudyView study={study} />
     </main>
   );

@@ -13,11 +13,12 @@ export function WorkPasswordGate({ projectName }: WorkPasswordGateProps) {
   return (
     <main
       id="main"
-      className="flex min-h-screen items-center justify-center bg-page px-6 py-16 text-neutral-30"
+      className="case-study-page flex min-h-screen items-center justify-center bg-page px-6 py-16 text-neutral-30"
     >
       <WorkPasswordPrompt
         title={`View ${projectName}`}
         description="Enter the password to open this case study."
+        sansTypography
         onSuccess={() => router.refresh()}
       />
     </main>
