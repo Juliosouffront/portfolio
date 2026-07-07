@@ -51,7 +51,7 @@ function CaseStudySectionHeader({
     <div className={cn("section-eyebrow-group", className)}>
       <SectionLabel text={label} color={labelColor} />
       <div className="section-intro">
-        <h2 className={cn(typography.caseStudyTitle, "text-center")}>{title}</h2>
+        <h2 className={cn(typography.caseStudyTitle, "case-study-section-title text-center")}>{title}</h2>
       </div>
     </div>
   );
@@ -159,7 +159,7 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
 
       <div
         ref={layoutRef}
-        className="case-study-layout"
+        className="case-study-layout case-study-page"
         style={{ backgroundColor: study.themeColor }}
       >
         <CaseStudySidebar study={study} items={navItems} />
@@ -170,7 +170,9 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
               <div className="section-eyebrow-group">
                 <SectionLabel text={study.name} color={labelColor} />
                 <div className="section-intro">
-                  <h1 className={cn(typography.caseStudyHero, "text-center")}>{study.heroTitle}</h1>
+                  <h1 className={cn(typography.caseStudyHero, "case-study-hero-title text-center")}>
+                    {study.heroTitle}
+                  </h1>
                   <p className={cn(typography.caption, "text-center")}>{study.tags.join(" · ")}</p>
                   <p className={cn(typography.bodyLg, typography.measure, "text-center text-neutral-20")}>
                     {study.description}
@@ -225,7 +227,7 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
               <div className="grid gap-12 tablet:grid-cols-3 tablet:gap-8">
                 {study.impact.map((stat) => (
                   <div key={stat.label} className="flex flex-col items-center text-center">
-                    <div className={typography.caseStudyImpactValue}>
+                    <div className={cn(typography.caseStudyImpactValue, "case-study-impact-value")}>
                       {stat.value}
                       {stat.valueSecondary && (
                         <>
