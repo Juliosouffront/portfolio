@@ -286,21 +286,23 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
             </div>
           </CaseStudySection>
 
-          <CaseStudySection id="next-steps">
-            <div className="container-site mx-auto max-w-3xl">
-              <CaseStudyLabel>What I would do next..</CaseStudyLabel>
-              <div className="mt-8 space-y-10">
-                {study.nextSteps.map((step) => (
-                  <div key={step.title} className="text-center">
-                    <CaseStudyTitle>{step.title}</CaseStudyTitle>
-                    <CaseStudyProse className="mt-4">
-                      <p>{step.body}</p>
-                    </CaseStudyProse>
-                  </div>
-                ))}
+          {study.nextSteps.length > 0 && (
+            <CaseStudySection id="next-steps">
+              <div className="container-site mx-auto max-w-3xl">
+                <CaseStudyLabel>What I would do next..</CaseStudyLabel>
+                <div className="mt-8 space-y-10">
+                  {study.nextSteps.map((step) => (
+                    <div key={step.title} className="text-center">
+                      <CaseStudyTitle>{step.title}</CaseStudyTitle>
+                      <CaseStudyProse className="mt-4">
+                        <p>{step.body}</p>
+                      </CaseStudyProse>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </CaseStudySection>
+            </CaseStudySection>
+          )}
 
           <CaseStudySection id="closing" className="pb-16 tablet:pb-20">
             <div className="container-site mx-auto max-w-3xl text-center">

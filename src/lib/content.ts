@@ -39,17 +39,17 @@ export const work = {
   slides: [
     {
       id: "qik-pro",
-      name: "Qik Pro",
+      name: "Qik PRO",
       category: "0 to 1 · Product Design",
       description:
-        "Qik Pro is the premium tier of Qik Banco Digital Dominicano — a neobank ecosystem with personalized cashback, preferential rates, Pro Agent support, and a Mastercard Platinum card with Artlight technology.",
+        "How Qik evolved with customers who had outgrown simplicity — building a premium experience around confidence, real life, and every touchpoint from card to app.",
       desktopImage: assets.work.qikPro.desktop,
       mobileImage: assets.work.qikPro.mobile,
       alt: "Qik Pro product design",
       vimeo: {
         id: "1179002856",
         url: "https://vimeo.com/1179002856",
-        title: "Qik Pro",
+        title: "Qik PRO",
       },
     },
     {

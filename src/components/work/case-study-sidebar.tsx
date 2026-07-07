@@ -23,7 +23,7 @@ export function getCaseStudyNavItems(study: CaseStudy): CaseStudyNavItem[] {
       label: `Design ${feature.index}/${feature.total}`,
     })),
     { id: "reflections", label: "Reflections" },
-    { id: "next-steps", label: "What's next" },
+    ...(study.nextSteps.length > 0 ? [{ id: "next-steps", label: "What's next" }] : []),
     { id: "closing", label: "Closing" },
   ];
 }
