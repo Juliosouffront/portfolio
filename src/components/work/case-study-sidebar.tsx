@@ -3,7 +3,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { scrollToElement } from "@/lib/scroll-to";
+import { sectionLabels } from "@/lib/content";
 import type { CaseStudy } from "@/lib/work-case-studies";
+import { SectionLabel } from "@/components/ui/SectionLabel";
+import { typography } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 
 export type CaseStudyNavItem = {
@@ -65,14 +68,16 @@ export function CaseStudySidebar({ study, items }: CaseStudySidebarProps) {
       <div className="flex h-full flex-col px-4 py-6 tablet:px-5 tablet:py-8">
         <Link
           href="/#work"
-          className="mb-8 inline-flex items-center gap-2 font-sans text-sm text-neutral-20 transition-colors hover:text-neutral-30"
+          className={cn(typography.caption, "mb-8 inline-flex items-center gap-2 transition-colors hover:text-neutral-30")}
           data-cursor-hover
         >
           <span aria-hidden>←</span>
           <span>Back</span>
         </Link>
 
-        <p className="mb-4 font-sans text-xs uppercase tracking-[0.12em] text-neutral-10">{study.name}</p>
+        <div className="mb-4">
+          <SectionLabel text={study.name} color={sectionLabels.work.color} align="left" />
+        </div>
 
         <nav aria-label="Case study sections" className="min-h-0 flex-1 overflow-y-auto">
           <ul className="space-y-1">
@@ -85,7 +90,8 @@ export function CaseStudySidebar({ study, items }: CaseStudySidebarProps) {
                     if (el) scrollToElement(el, -24);
                   }}
                   className={cn(
-                    "w-full rounded-lg px-2 py-2 text-left font-sans text-xs leading-snug transition-colors tablet:px-3 tablet:text-sm",
+                    "w-full rounded-lg px-2 py-2 text-left leading-snug transition-colors tablet:px-3",
+                    typography.caption,
                     activeId === item.id
                       ? "bg-neutral-30/8 font-medium text-neutral-30"
                       : "text-neutral-20 hover:bg-neutral-30/5 hover:text-neutral-30",
