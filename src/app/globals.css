@@ -575,23 +575,14 @@
     min-height: 100vh;
   }
 
-  .case-study-layout h1,
-  .case-study-layout h2,
-  .case-study-layout h3,
-  .case-study-layout h4,
-  .case-study-layout h5,
-  .case-study-layout h6 {
+  /* Case study routes: never use Goudy — remap serif tokens to Gabarito */
+  .case-study-page {
+    --font-serif: var(--font-body);
     font-family: var(--font-body);
   }
 
-  .case-study-page h1,
-  .case-study-page h2,
-  .case-study-page h3,
-  .case-study-page h4,
-  .case-study-page h5,
-  .case-study-page h6,
-  .case-study-page .font-serif {
-    font-family: var(--font-body);
+  .case-study-page :where(h1, h2, h3, h4, h5, h6, .font-serif) {
+    font-family: var(--font-body) !important;
   }
 
   .case-study-sidebar {

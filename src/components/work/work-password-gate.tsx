@@ -13,7 +13,7 @@ export function WorkPasswordGate({ projectName }: WorkPasswordGateProps) {
   return (
     <main
       id="main"
-      className="case-study-page flex min-h-screen items-center justify-center bg-page px-6 py-16 text-neutral-30"
+      className="flex min-h-screen items-center justify-center bg-page px-6 py-16 text-neutral-30"
     >
       <WorkPasswordPrompt
         title={`View ${projectName}`}
