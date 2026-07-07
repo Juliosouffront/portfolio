@@ -67,7 +67,7 @@ function CaseStudyHeroMedia({ study }: { study: CaseStudy }) {
   const { heroMedia } = study;
 
   return (
-    <div className="relative mx-auto mt-10 w-full max-w-5xl overflow-hidden rounded-card shadow-soft">
+    <div className="relative mx-auto w-full overflow-hidden rounded-card shadow-soft">
       <div className="relative aspect-[1072/603] w-full bg-neutral-30/5">
         {heroMedia.vimeoId ? (
           <>
@@ -165,8 +165,11 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
         <CaseStudySidebar study={study} items={navItems} />
 
         <div ref={contentRef} className="case-study-main">
-          <CaseStudySection id="overview" className="pt-10 tablet:pt-12">
-            <div className="container-site mx-auto max-w-3xl">
+          <CaseStudySection id="overview" className="pt-6 tablet:pt-8">
+            <div className="container-site mx-auto max-w-5xl">
+              <CaseStudyHeroMedia study={study} />
+            </div>
+            <div className="container-site mx-auto mt-10 max-w-3xl">
               <div className="section-eyebrow-group">
                 <SectionLabel text={study.name} color={labelColor} />
                 <div className="section-intro">
@@ -179,7 +182,6 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
                   </p>
                 </div>
               </div>
-              <CaseStudyHeroMedia study={study} />
             </div>
           </CaseStudySection>
 
