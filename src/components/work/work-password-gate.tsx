@@ -18,6 +18,7 @@ export function WorkPasswordGate({ projectName }: WorkPasswordGateProps) {
       <WorkPasswordPrompt
         title={`View ${projectName}`}
         description="Enter the password to open this case study."
+        sansTypography
         onSuccess={() => router.refresh()}
       />
     </main>

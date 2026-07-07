@@ -18,6 +18,18 @@ export const typography = {
   /** Pull quote — 22–28px */
   quote:
     "font-serif text-[clamp(1.375rem,2.5vw,1.75rem)] leading-[1.5] tracking-[-0.02em] text-neutral-30",
+  /** Case study hero — sans, no Goudy */
+  caseStudyHero:
+    "font-sans text-[clamp(1.75rem,4vw,2.25rem)] leading-[1.1] tracking-[-0.02em] text-neutral-30",
+  /** Case study section title — sans, no Goudy */
+  caseStudyTitle:
+    "font-sans text-[clamp(1.375rem,3vw,1.75rem)] leading-[1.25] tracking-[-0.02em] text-neutral-30",
+  /** Case study card / stat title — sans */
+  caseStudyCardTitle:
+    "font-sans text-[clamp(1.125rem,2vw,1.25rem)] leading-[1.35] tracking-[-0.02em] text-neutral-30",
+  /** Case study impact number — sans */
+  caseStudyImpactValue:
+    "font-sans text-[clamp(2.5rem,8vw,4rem)] leading-[0.95] tracking-[-0.04em] text-neutral-30",
   /** Footer headline */
   footerHeadline:
     "font-sans text-[clamp(1.25rem,2.5vw,1.5rem)] font-normal leading-[1.4] text-neutral-30",

@@ -4,18 +4,23 @@ import { AppImage as Image } from "@/components/ui/app-image";
 import Link from "next/link";
 import { useCallback, useMemo, useRef, useState } from "react";
 import type { CaseStudy } from "@/lib/work-case-studies";
+import { sectionLabels } from "@/lib/content";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { PageIntroCurtain } from "@/components/work/page-intro-curtain";
 import {
   CaseStudySidebar,
   getCaseStudyNavItems,
 } from "@/components/work/case-study-sidebar";
+import { SectionLabel } from "@/components/ui/SectionLabel";
 import { VimeoPlayer } from "@/components/ui/vimeo-player";
+import { typography } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 
 type CaseStudyViewProps = {
   study: CaseStudy;
 };
+
+const labelColor = sectionLabels.work.color;
 
 function CaseStudySection({
   children,
@@ -33,23 +38,36 @@ function CaseStudySection({
   );
 }
 
-function CaseStudyLabel({ children }: { children: React.ReactNode }) {
-  return <p className="case-study-section-label">{children}</p>;
-}
-
-function CaseStudyTitle({ children }: { children: React.ReactNode }) {
-  return <h2 className="case-study-section-title mt-4">{children}</h2>;
+function CaseStudySectionHeader({
+  label,
+  title,
+  className,
+}: {
+  label: string;
+  title: string;
+  className?: string;
+}) {
+  return (
+    <div className={cn("section-eyebrow-group", className)}>
+      <SectionLabel text={label} color={labelColor} />
+      <div className="section-intro">
+        <h2 className={cn(typography.caseStudyTitle, "case-study-section-title text-center")}>{title}</h2>
+      </div>
+    </div>
+  );
 }
 
 function CaseStudyProse({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("case-study-prose mt-6 space-y-4", className)}>{children}</div>;
+  return (
+    <div className={cn("case-study-prose mt-6 space-y-4", typography.body, className)}>{children}</div>
+  );
 }
 
 function CaseStudyHeroMedia({ study }: { study: CaseStudy }) {
   const { heroMedia } = study;
 
   return (
-    <div className="relative mx-auto mt-10 w-full max-w-5xl overflow-hidden rounded-card shadow-soft">
+    <div className="relative mx-auto w-full overflow-hidden rounded-card shadow-soft">
       <div className="relative aspect-[1072/603] w-full bg-neutral-30/5">
         {heroMedia.vimeoId ? (
           <>
@@ -141,33 +159,42 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
 
       <div
         ref={layoutRef}
-        className="case-study-layout"
+        className="case-study-layout case-study-page"
         style={{ backgroundColor: study.themeColor }}
       >
         <CaseStudySidebar study={study} items={navItems} />
 
         <div ref={contentRef} className="case-study-main">
-          <CaseStudySection id="overview" className="pt-10 tablet:pt-12">
-            <div className="container-site mx-auto max-w-3xl text-center">
-              <h1 className="case-study-hero-title">{study.heroTitle}</h1>
-              <p className="mt-6 font-sans text-sm leading-relaxed text-neutral-20 tablet:text-base">
-                {study.tags.join(", ")}
-              </p>
-              <p className="case-study-prose mt-6">{study.description}</p>
+          <CaseStudySection id="overview" className="pt-6 tablet:pt-8">
+            <div className="container-site mx-auto max-w-5xl">
               <CaseStudyHeroMedia study={study} />
+            </div>
+            <div className="container-site mx-auto mt-10 max-w-3xl">
+              <div className="section-eyebrow-group">
+                <SectionLabel text={study.name} color={labelColor} />
+                <div className="section-intro">
+                  <h1 className={cn(typography.caseStudyHero, "case-study-hero-title text-center")}>
+                    {study.heroTitle}
+                  </h1>
+                  <p className={cn(typography.caption, "text-center")}>{study.tags.join(" · ")}</p>
+                  <p className={cn(typography.bodyLg, typography.measure, "text-center text-neutral-20")}>
+                    {study.description}
+                  </p>
+                </div>
+              </div>
             </div>
           </CaseStudySection>
 
           <CaseStudySection id="details">
             <div className="container-site mx-auto max-w-4xl">
-              <CaseStudyLabel>Details</CaseStudyLabel>
+              <div className="section-eyebrow-group">
+                <SectionLabel text="Details" color={labelColor} />
+              </div>
               <div className="mt-10 grid gap-10 tablet:grid-cols-2 tablet:gap-x-16 tablet:gap-y-12">
                 {study.meta.map((item) => (
                   <div key={item.label} className="text-center">
-                    <p className="font-sans text-base leading-relaxed text-neutral-30 tablet:text-lg">
-                      {item.value}
-                    </p>
-                    <p className="mt-2 font-sans text-xs uppercase tracking-[0.12em] text-neutral-10">
+                    <p className={cn(typography.bodyLg, "text-neutral-30")}>{item.value}</p>
+                    <p className={cn(typography.caption, "mt-2 uppercase tracking-[0.12em] text-neutral-10")}>
                       {item.label}
                     </p>
                   </div>
@@ -178,13 +205,16 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
 
           <CaseStudySection id="summary">
             <div className="container-site mx-auto max-w-5xl">
+              <div className="section-eyebrow-group mb-10">
+                <SectionLabel text="Summary" color={labelColor} />
+              </div>
               <div className="grid gap-12 tablet:grid-cols-3 tablet:gap-8">
                 {study.summary.map((card) => (
                   <article key={card.label} className="text-center">
-                    <h3 className="font-serif text-lg leading-snug tracking-[-0.02em] text-neutral-30 tablet:text-xl">
-                      {card.label} {card.title}
+                    <h3 className={cn(typography.caseStudyCardTitle, "text-center")}>
+                      <span style={{ color: labelColor }}>{card.label}</span> {card.title}
                     </h3>
-                    <p className="mt-4 font-sans text-base leading-relaxed text-neutral-20">{card.body}</p>
+                    <p className={cn(typography.body, "mt-4")}>{card.body}</p>
                   </article>
                 ))}
               </div>
@@ -193,11 +223,13 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
 
           <CaseStudySection id="impact">
             <div className="container-site mx-auto max-w-5xl">
-              <CaseStudyLabel>Impact</CaseStudyLabel>
-              <div className="mt-10 grid gap-12 tablet:grid-cols-3 tablet:gap-8">
+              <div className="section-eyebrow-group mb-10">
+                <SectionLabel text="Impact" color={labelColor} />
+              </div>
+              <div className="grid gap-12 tablet:grid-cols-3 tablet:gap-8">
                 {study.impact.map((stat) => (
                   <div key={stat.label} className="flex flex-col items-center text-center">
-                    <div className="case-study-impact-value">
+                    <div className={cn(typography.caseStudyImpactValue, "case-study-impact-value")}>
                       {stat.value}
                       {stat.valueSecondary && (
                         <>
@@ -206,12 +238,8 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
                         </>
                       )}
                     </div>
-                    <p className="mt-3 font-serif text-lg leading-snug tracking-[-0.02em] text-neutral-30">
-                      {stat.label}
-                    </p>
-                    <p className="mt-2 max-w-[16rem] font-sans text-sm leading-relaxed text-neutral-20">
-                      {stat.footnote}
-                    </p>
+                    <p className={cn(typography.caseStudyCardTitle, "mt-3")}>{stat.label}</p>
+                    <p className={cn(typography.caption, "mt-2 max-w-[16rem]")}>{stat.footnote}</p>
                   </div>
                 ))}
               </div>
@@ -221,15 +249,14 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
           {study.sections.map((section) => (
             <CaseStudySection key={section.id} id={section.id}>
               <div className="container-site mx-auto max-w-3xl">
-                <CaseStudyLabel>{section.label}</CaseStudyLabel>
-                <CaseStudyTitle>{section.title}</CaseStudyTitle>
+                <CaseStudySectionHeader label={section.label} title={section.title} />
                 <CaseStudyProse>
                   {section.body.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>
                   ))}
                 </CaseStudyProse>
                 {section.bullets && (
-                  <ul className="case-study-prose mt-6 list-none space-y-3">
+                  <ul className={cn("case-study-prose mt-6 list-none space-y-3", typography.body)}>
                     {section.bullets.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
                     ))}
@@ -242,11 +269,11 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
           {study.designFeatures.map((feature) => (
             <CaseStudySection key={feature.title} id={`design-${feature.index}`}>
               <div className="container-site">
-                <div className="mx-auto max-w-3xl text-center">
-                  <CaseStudyLabel>
-                    Design {feature.index}/{feature.total}
-                  </CaseStudyLabel>
-                  <CaseStudyTitle>{feature.title}</CaseStudyTitle>
+                <div className="mx-auto max-w-3xl">
+                  <CaseStudySectionHeader
+                    label={`Design ${feature.index}/${feature.total}`}
+                    title={feature.title}
+                  />
                   <CaseStudyProse>
                     <p>{feature.body}</p>
                   </CaseStudyProse>
@@ -261,7 +288,7 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
                     {feature.captions.map((caption) => (
                       <p
                         key={caption}
-                        className="text-center font-sans text-sm leading-relaxed text-neutral-20 tablet:text-left"
+                        className={cn(typography.caption, "text-center tablet:text-left")}
                       >
                         {caption}
                       </p>
@@ -274,11 +301,13 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
 
           <CaseStudySection id="reflections">
             <div className="container-site mx-auto max-w-3xl">
-              <CaseStudyLabel>Reflections</CaseStudyLabel>
-              <div className="case-study-prose mt-8 space-y-6">
+              <div className="section-eyebrow-group mb-8">
+                <SectionLabel text="Reflections" color={labelColor} />
+              </div>
+              <div className={cn("case-study-prose space-y-6", typography.body)}>
                 {study.reflections.map((reflection) => (
                   <p key={reflection.title}>
-                    <span className="font-medium text-neutral-30">{reflection.title}:</span>{" "}
+                    <span className="font-semibold text-neutral-30">{reflection.title}:</span>{" "}
                     {reflection.body}
                   </p>
                 ))}
@@ -286,34 +315,38 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
             </div>
           </CaseStudySection>
 
-          <CaseStudySection id="next-steps">
-            <div className="container-site mx-auto max-w-3xl">
-              <CaseStudyLabel>What I would do next..</CaseStudyLabel>
-              <div className="mt-8 space-y-10">
-                {study.nextSteps.map((step) => (
-                  <div key={step.title} className="text-center">
-                    <CaseStudyTitle>{step.title}</CaseStudyTitle>
-                    <CaseStudyProse className="mt-4">
-                      <p>{step.body}</p>
-                    </CaseStudyProse>
-                  </div>
-                ))}
+          {study.nextSteps.length > 0 && (
+            <CaseStudySection id="next-steps">
+              <div className="container-site mx-auto max-w-3xl">
+                <div className="section-eyebrow-group mb-8">
+                  <SectionLabel text="What I would do next.." color={labelColor} />
+                </div>
+                <div className="space-y-10">
+                  {study.nextSteps.map((step) => (
+                    <div key={step.title} className="text-center">
+                      <h3 className={cn(typography.caseStudyTitle, "text-center")}>{step.title}</h3>
+                      <CaseStudyProse className="mt-4">
+                        <p>{step.body}</p>
+                      </CaseStudyProse>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </CaseStudySection>
+            </CaseStudySection>
+          )}
 
           <CaseStudySection id="closing" className="pb-16 tablet:pb-20">
             <div className="container-site mx-auto max-w-3xl text-center">
-              <p className="font-serif text-lg leading-relaxed text-neutral-30 tablet:text-xl">
+              <p className={cn(typography.bodyLg, typography.measure, "mx-auto text-neutral-30")}>
                 {study.closing}
               </p>
-              <p className="mt-12 font-serif text-xl text-neutral-20">fin.</p>
+              <p className={cn(typography.caption, "mt-12")}>fin.</p>
             </div>
           </CaseStudySection>
 
           <footer className="border-t border-[rgb(117_115_114_/_0.15)] px-6 py-10 tablet:px-8">
             <div className="container-site flex flex-col items-center gap-4 text-center">
-              <div className="flex gap-6 font-sans text-sm text-neutral-20">
+              <div className={cn("flex gap-6", typography.caption)}>
                 <Link href="/#contact" className="underline underline-offset-4">
                   contact
                 </Link>
@@ -321,10 +354,10 @@ export function CaseStudyView({ study }: CaseStudyViewProps) {
                   work
                 </Link>
               </div>
-              <p className="max-w-lg font-sans text-sm leading-relaxed text-neutral-20">
+              <p className={cn(typography.caption, "max-w-lg")}>
                 Thanks for reading. This case study is part of Julio Souffront&apos;s portfolio.
               </p>
-              <p className="font-sans text-xs text-neutral-10">
+              <p className={cn(typography.caption, "text-neutral-10")}>
                 © 2026 Julio Souffront. All rights reserved.
               </p>
             </div>

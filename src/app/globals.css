@@ -532,7 +532,7 @@
   }
 
   .case-study-hero-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-gabarito), "Gabarito", system-ui, sans-serif !important;
     font-size: clamp(1.75rem, 4vw, 2.25rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -540,18 +540,8 @@
     color: rgb(var(--color-neutral-30));
   }
 
-  .case-study-section-label {
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: center;
-    color: rgb(var(--color-neutral-10));
-  }
-
   .case-study-section-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-gabarito), "Gabarito", system-ui, sans-serif !important;
     font-size: clamp(1.375rem, 3vw, 1.75rem);
     line-height: 1.25;
     letter-spacing: -0.02em;
@@ -562,17 +552,17 @@
   }
 
   .case-study-prose {
-    max-width: 42rem;
+    max-width: var(--text-measure);
     margin-inline: auto;
     text-align: center;
     font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: var(--text-body-line);
-    color: rgb(var(--color-neutral-20));
+    color: rgb(var(--color-dark-brown));
   }
 
   .case-study-impact-value {
-    font-family: var(--font-serif);
+    font-family: var(--font-gabarito), "Gabarito", system-ui, sans-serif !important;
     font-size: clamp(2.5rem, 8vw, 4rem);
     line-height: 0.95;
     letter-spacing: -0.04em;
@@ -581,8 +571,24 @@
   }
 
   .case-study-layout {
+    --font-serif: var(--font-body);
     display: flex;
     min-height: 100vh;
+    font-family: var(--font-body);
+  }
+
+  .case-study-layout :where(h1, h2, h3, h4, h5, h6, .font-serif) {
+    font-family: var(--font-gabarito), "Gabarito", system-ui, sans-serif !important;
+  }
+
+  /* Case study routes: never use Goudy — remap serif tokens to Gabarito */
+  .case-study-page {
+    --font-serif: var(--font-body);
+    font-family: var(--font-body);
+  }
+
+  .case-study-page :where(h1, h2, h3, h4, h5, h6, .font-serif) {
+    font-family: var(--font-gabarito), "Gabarito", system-ui, sans-serif !important;
   }
 
   .case-study-sidebar {
